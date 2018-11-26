@@ -37,8 +37,9 @@ public class ExpectedResults {
 		dataCellValueMake = sheet.getRow(i).getCell(2).getStringCellValue();
 		// getting the colour from the excel sheet.
 		dataCellValueColour = sheet.getRow(i).getCell(3).getStringCellValue();
-		System.out.println("The expected make for " + (i-1) + " record is " + dataCellValueMake);
-		System.out.println("The expected colour for " + (i-1) + " record is " + dataCellValueColour);
+		String regNumber = PageObjects.getRegNumber();
+		System.out.println("The expected make for reg number: " + regNumber + " record is " + dataCellValueMake);
+		System.out.println("The expected colour for reg number: " + regNumber + " record is " + dataCellValueColour);
 		// Asserting the make for a vehicle registration number.
 		assertEquals(dataCellValueMake,make);
 		// Asserting the make for a vehicle registration number.

@@ -19,16 +19,14 @@ import org.springframework.util.FileCopyUtils;
 import Part1.ScanConfigFolder;
 
 public class Action {
-	
 	@Test
 	public void testCase001(){
-		
 		//calling the methods to scan the configure folder and get the input files.
 		ArrayList<String> fileName = ScanConfigFolder.configScan();
 		
-		// Setting up firfox driver - geckodriver.
+		// Setting up chrome driver - geckodriver.
 		System.setProperty("webdriver.chrome.driver", "/home/ajay/Srini/libraryFIlesSelenium/Srini/ChromeDriver/chromedriver");
-		//invoking firefox and navigating to the URL.
+		//invoking chrome and navigating to the URL.
 		WebDriver driver = new ChromeDriver();
 		String appUrl = "https://www.gov.uk/get-vehicle-information-from-dvla";
 		driver.get(appUrl);	
@@ -55,10 +53,11 @@ public class Action {
 				PageObjects.clickContinueButton();
 				// getting the make from the webpage.
 				String make = PageObjects.getMake();
-				System.out.println("The actual make for " + (i-1) + " record is " + make);
+				String regNumber = PageObjects.getRegNumber();
+				System.out.println("The actual make for reg number: " + regNumber + " is " + make);
 				// getting the colour from the webpage.
 				String colour = PageObjects.getColour();
-				System.out.println("The actual make for " + (i-1) + " record is " + colour);
+				System.out.println("The actual colour for reg number: " + regNumber + " is " + colour);
 				// checking the result.
 				ExpectedResults.expResult(callFileName,i,make,colour);
 				 

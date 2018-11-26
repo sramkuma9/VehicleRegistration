@@ -4,9 +4,10 @@ Author - Srini Ramkumar.
 */
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
 
 public class PageObjects {
 	
@@ -18,8 +19,11 @@ public class PageObjects {
 	@FindBy(id = "Vrm")
 	static WebElement inputVehRegNum;
 	
-	@FindBy(tagName ="button")
+	@FindBy(tagName = "Button")
 	static WebElement continueButton;
+	
+	@FindBy(css = "#pr3 > div > ul > li:nth-child(1) > span.reg-mark")
+	static WebElement regNumber;
 	
 	@FindBy(css = "li.list-summary-item > span > strong") 
 	static WebElement make;
@@ -32,7 +36,7 @@ public class PageObjects {
 	
 	// Initializing the webelements of the webpage using page factory.
 	public void pageFactory() {
-		WebDriver driver = new FirefoxDriver();
+		WebDriver driver = new ChromeDriver();
 		PageFactory.initElements(driver, PageObjects.class);
 	}
 	
@@ -50,6 +54,12 @@ public class PageObjects {
 	public static void clickContinueButton(){
 		continueButton.click();
 	}
+	
+	// method to get the make.
+		public static String getRegNumber(){
+			String vehRegNumber = regNumber.getText();
+			return vehRegNumber;
+		}
 	
 	// method to click back button.
 	public static void clickbackButton(){
