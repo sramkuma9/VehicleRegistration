@@ -1,5 +1,3 @@
-package Part1;
-
 /*Title - scan a directory for csv/xls files.
 Author - Srini Ramkumar
 Date - 28/01/2018*/
@@ -13,7 +11,7 @@ public class ScanConfigFolder{
 	
 	public static ArrayList<String> configScan(){
 		// Path to Configure directory.
-	    File configuredDir = new File("/home/ajay/Srini/myWorkSpace/VehicleRegistration/src");
+	    File configuredDir = new File("/home/ajay/Srini/myWorkSpace/VehicleRegistration");
 	    ArrayList<String> configureXlsCsv = null;
 	    
 	    // check if the config dir is present and call the method to get CSV & XLS files.

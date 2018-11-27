@@ -1,44 +1,39 @@
-package Part2;
-
 /* Title - Test for checking the make and colour of a vehicle.
  Author - Srini Ramkumar.
  */
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
-import org.junit.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.util.FileCopyUtils;
-
-import Part1.ScanConfigFolder;
+//import org.springframework.util.FileCopyUtils;
 
 public class Action extends BaseTest{
+	
+	public static org.openqa.selenium.WebDriver driver;
+	private static PageObjects pO;
+	
+	@BeforeMethod
+	@org.testng.annotations.BeforeClass
+	public void setUp() {
+		driver=getDriver();		
+		pO = new PageObjects(driver);
+	}
 	@Test
-	public void testCase001(){
+	public void testCase001() throws InterruptedException{
 		//calling the methods to scan the configure folder and get the input files.
 		ArrayList<String> fileName = ScanConfigFolder.configScan();
-		
-		// Setting up chrome driver - geckodriver.
-		//System.setProperty("webdriver.chrome.driver", "/home/ajay/Srini/libraryFIlesSelenium/Srini/ChromeDriver/chromedriver");
-		//invoking chrome and navigating to the URL.
-		//WebDriver driver = new ChromeDriver();
-		//String appUrl = "https://www.gov.uk/get-vehicle-information-from-dvla";
-		//driver.get(appUrl);	
-		// waiting the webpage to load.
-		driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
-		PageFactory.initElements(driver, PageObjects.class);
+		TimeUnit.SECONDS.sleep(3);
 		// clicking the startNow button.
-		PageObjects.clickStartNowButton();
+		pO.clickStartNowButton();
+		TimeUnit.SECONDS.sleep(3);
 		driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS) ;
-		
 		int j=1;
-		
 		for (Iterator<String> iter = fileName.iterator(); iter.hasNext(); j++)
 		{ 
 			String callFileName = iter.next();
@@ -60,7 +55,6 @@ public class Action extends BaseTest{
 				System.out.println("The actual colour for reg number: " + regNumber + " is " + colour);
 				// checking the result.
 				ExpectedResults.expResult(callFileName,i,make,colour);
-				 
 				// take screenshot function
 				File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 				// copy screenshot locally.
